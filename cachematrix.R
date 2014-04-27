@@ -1,5 +1,7 @@
-## makeCacheMatrix is a function that contains the value of a matrix
+## makeCacheMatrix is a function that creates an object that 
+## contains the value of a matrix, has space for its inverse
 ## together with four functions that operate on that matrix
+
 ## cacheSolve finds and caches the inverse of the special matrix type 
 ## created by makeCacheMatrix
 
@@ -10,16 +12,24 @@
 ## This link is *very* helpful
 ## https://class.coursera.org/rprog-002/forum/thread?thread_id=696
 
-
+## get,set, getInverse and setInverse are helper functions that 
+## live together with the data. 
 makeCacheMatrix <- function(x = numeric()) {
-  inv <- NULL
+  inv <- NULL   ##Our flag
+  
+  ## Use lexical scoping to set the value of the matrix that comes with this type
   set <- function(y) {
     x <<- y             ## This double arrow set <<- sets the value of x in the parent frame
     inv <<- NULL        ## This double arrow set <<- sets the value of inv in the parent frame
   }
-  get <- function() x
-  setInverse <- function(inverse) inv <<- inverse ##store the inverse and set the flag
-  getInverse <- function() inv
+  
+  get <- function() x   ## Return the matrix stored within this special object
+  
+  setInverse <- function(inverse) inv <<- inverse ##Store the inverse and set the flag
+  
+  ##Return the value of the flag. If already computed this will be the inverse
+  getInverse <- function() inv  
+  
   list(set = set, get = get,
        setInverse = setInverse,
        getInverse = getInverse)
@@ -33,13 +43,17 @@ makeCacheMatrix <- function(x = numeric()) {
 
 cacheSolve function(x, ...) {
   ## Return the inverse of x
+  
   i <- x$getInverse() 
+  
   if(!is.null(i)) { ## check to see if the inverse has already been computed
     message("getting cached data")
     return(i)
   }
+  ## If we get here, the inverese has not been computed yet
   data <- x$get()
-  matrixInv <- solve(data, ...)
+  matrixInv <- solve(data, ...) ## This is the R function for computing inverse
   x$setInverse(matrixInv) ##store the inverese. This function will set the flag for us
-  matrixInv
+  
+  matrixInv   ##Return the computed inverse
 }
