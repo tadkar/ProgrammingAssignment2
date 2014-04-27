@@ -19,7 +19,7 @@ makeCacheMatrix <- function(x = numeric()) {
   
   ## Use lexical scoping to set the value of the matrix that comes with this type
   set <- function(y) {
-    x <<- y             ## This double arrow set <<- sets the value of x in the parent frame
+    x <<- y             ## This double arrow set <<- sets the value of x in the makeCacheMatrix environment
     inv <<- NULL        ## This double arrow set <<- sets the value of inv in the parent frame
   }
   
