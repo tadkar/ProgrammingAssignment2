@@ -5,7 +5,7 @@
 
 ## The way makeCacheMatrix works is by using the value m as a flag
 ## The flag is NULL if the data is fresh 
-## and contains the inverse if the data has not changed 
+## Flag contains the inverse if the data has not changed 
 
 ## This link is *very* helpful
 ## https://class.coursera.org/rprog-002/forum/thread?thread_id=696
@@ -26,8 +26,8 @@ makeCacheMatrix <- function(x = numeric()) {
 }
 
 
-## This function first checks if the inverse has already been 
-## found by checking the flag set in the special matrix type
+## This function first checks if the inverse has already been found 
+## by checking the flag set in the special matrix type
 ## If the flag is not NULL, the inverse can be retreived
 ## Else the inverse is found and the flag is set to the inverse
 
